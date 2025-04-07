@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Music Site</title>
+  <style>
+    #music-info {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-family: sans-serif;
+      font-size: 18px;
+    }
+
+    #play-button {
+      margin-top: 100px;
+      padding: 12px 24px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="music-info">Now Playing: My Awesome Song</div>
+
+<center>
+  <button id="play-button">Play Music</button>
+</center>
+
+<audio id="bg-music">
+  <source src="song.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  const button = document.getElementById("play-button");
+  const music = document.getElementById("bg-music");
+  const info = document.getElementById("music-info");
+
+  button.addEventListener("click", () => {
+    music.play();
+    info.style.display = "block";
+  });
+</script>
+
+</body>
+</html>
