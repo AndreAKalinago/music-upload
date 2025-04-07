@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Music Playlist</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    #music-info {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #000;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+<div id="music-info">Now playing: <span id="song-title">Loading...</span></div>
+
+<audio id="bg-music" autoplay></audio>
+
+<script>
+  const playlist = [
+    { src: 'song1.mp3', title: 'Song 1' },
+    { src: 'song2.mp3', title: 'Song 2' },
+    { src: 'song3.mp3', title: 'Song 3' }
+  ];
+
+  let currentTrack = 0;
+  const audio = document.getElementById('bg-music');
+  const titleSpan = document.getElementById('song-title');
+
+  function playTrack(index) {
+    const track = playlist[index];
+    audio.src = track.src;
+    titleSpan.textContent = track.title;
+    audio.play().catch(err => {
+      console.log('Autoplay blocked. Waiting for user interaction...');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    playTrack(currentTrack);
+  });
+
+  audio.addEventListener('ended', () => {
+    currentTrack++;
+    if (currentTrack < playlist.length) {
+      playTrack(currentTrack);
+    } else {
+      document.getElementById('music-info').textContent = 'Playlist ended';
+    }
+  });
+</script>
+
+</body>
+</html>
